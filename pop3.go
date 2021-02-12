@@ -2,6 +2,7 @@
 package pop3
 
 import (
+	"crypto/tls"
 	"errors"
 	"fmt"
 	"net"
@@ -37,7 +38,7 @@ type Client struct {
 // Dial returns a new Client connected to an POP server at addr.
 // The addr must include a port number.
 func Dial(addr string) (*Client, error) {
-	conn, err := net.Dial("tcp", addr)
+	conn, err := tls.Dial("tcp", addr, nil)
 
 	if err != nil {
 		return nil, err
